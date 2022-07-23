@@ -6,16 +6,16 @@ import ReactionForm from '../components/ReactionForm';
 
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
-import { QUERY_THOUGHT } from '../utils/queries';
+import { QUERY_PICKUP } from '../utils/queries';
 
-const SingleThought = (props) => {
-  const { id: thoughtId } = useParams();
+const SinglePickup = (props) => {
+  const { id: pickupId } = useParams();
 
-  const { loading, data } = useQuery(QUERY_THOUGHT, {
-    variables: { id: thoughtId },
+  const { loading, data } = useQuery(QUERY_PICKUP, {
+    variables: { id: pickupId },
   });
 
-  const thought = data?.thought || {};
+  const pickup = data?.pickup || {};
 
   if (loading) {
     return <div>Loading...</div>;
@@ -26,22 +26,22 @@ const SingleThought = (props) => {
       <div className="card mb-3">
         <p className="card-header">
           <span style={{ fontWeight: 700 }} className="text-light">
-            {thought.username}
+            {pickup.username}
           </span>{' '}
-          thought on {thought.createdAt}
+          pickup on {pickup.createdAt}
         </p>
         <div className="card-body">
-          <p>{thought.thoughtText}</p>
+          <p>{pickup.pickupText}</p>
         </div>
       </div>
 
-      {thought.reactionCount > 0 && (
-        <ReactionList reactions={thought.reactions} />
+      {pickup.reactionCount > 0 && (
+        <ReactionList reactions={pickup.reactions} />
       )}
 
-      {Auth.loggedIn() && <ReactionForm thoughtId={thought._id} />}
+      {Auth.loggedIn() && <ReactionForm pickupId={pickup._id} />}
     </div>
   );
 };
 
-export default SingleThought;
+export default SinglePickup;
