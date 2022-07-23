@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_REACTION } from '../../utils/mutations';
 
-const ReactionForm = ({ thoughtId }) => {
+const ReactionForm = ({ pickupId }) => {
   const [reactionBody, setBody] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
   const [addReaction, { error }] = useMutation(ADD_REACTION);
@@ -22,7 +22,7 @@ const ReactionForm = ({ thoughtId }) => {
 
     try {
       await addReaction({
-        variables: { reactionBody, thoughtId },
+        variables: { reactionBody, pickupId },
       });
 
       // clear form value

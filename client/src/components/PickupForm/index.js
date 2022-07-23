@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
 import { useMutation } from '@apollo/client';
-import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
+import { ADD_PICKUP } from '../../utils/mutations';
+import { QUERY_PICKUP, QUERY_ME } from '../../utils/queries';
 
-const ThoughtForm = () => {
-  const [thoughtText, setText] = useState('');
+const PickupForm = () => {
+  const [pickupText, setText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addThought, { error }] = useMutation(ADD_THOUGHT, {
-    update(cache, { data: { addThought } }) {
+  const [addPickup, { error }] = useMutation(ADD_PICKUP, {
+    update(cache, { data: { addPickup } }) {
       
         // could potentially not exist yet, so wrap in a try/catch
       try {
@@ -17,17 +17,17 @@ const ThoughtForm = () => {
         const { me } = cache.readQuery({ query: QUERY_ME });
         cache.writeQuery({
           query: QUERY_ME,
-          data: { me: { ...me, thoughts: [...me.thoughts, addThought] } },
+          data: { me: { ...me, pickup: [...me.pickup, addPickup] } },
         });
       } catch (e) {
-        console.warn("First thought insertion by user!")
+        console.warn("First pickup insertion by user!")
       }
 
-      // update thought array's cache
-      const { thoughts } = cache.readQuery({ query: QUERY_THOUGHTS });
+      // update pickup array's cache
+      const { pickups } = cache.readQuery({ query: QUERY_PICKUP });
       cache.writeQuery({
-        query: QUERY_THOUGHTS,
-        data: { thoughts: [addThought, ...thoughts] },
+        query: QUERY_PICKUP,
+        data: { pickups: [addPickup, ...pickups] },
       });
     }
   });
@@ -45,8 +45,8 @@ const ThoughtForm = () => {
     event.preventDefault();
 
     try {
-      await addThought({
-        variables: { thoughtText },
+      await addPickup({
+        variables: { pickupText },
       });
 
       // clear form value
@@ -71,7 +71,7 @@ const ThoughtForm = () => {
       >
         <textarea
           placeholder="Here's a new thought..."
-          value={thoughtText}
+          value={pickupText}
           className="form-input col-12 col-md-9"
           onChange={handleChange}
         ></textarea>
@@ -83,4 +83,4 @@ const ThoughtForm = () => {
   );
 };
 
-export default ThoughtForm;
+export default PickupForm;
