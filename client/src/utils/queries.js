@@ -1,10 +1,10 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_THOUGHTS = gql`
-  query thoughts($username: String) {
-    thoughts(username: $username) {
+export const QUERY_PICKUPS = gql`
+  query pickups($username: String) {
+    pickups(username: $username) {
       _id
-      thoughtText
+      pickupText
       createdAt
       username
       reactionCount
@@ -18,11 +18,11 @@ export const QUERY_THOUGHTS = gql`
   }
 `;
 
-export const QUERY_THOUGHT = gql`
-  query thought($id: ID!) {
-    thought(_id: $id) {
+export const QUERY_PICKUP = gql`
+  query pickup($id: ID!) {
+    pickup(_id: $id) {
       _id
-      thoughtText
+      pickupText
       createdAt
       username
       reactionCount
@@ -47,9 +47,9 @@ export const QUERY_USER = gql`
         _id
         username
       }
-      thoughts {
+      pickups {
         _id
-        thoughtText
+        pickupText
         createdAt
         reactionCount
       }
@@ -64,9 +64,9 @@ export const QUERY_ME = gql`
       username
       email
       friendCount
-      thoughts {
+      pickups {
         _id
-        thoughtText
+        pickupText
         createdAt
         reactionCount
         reactions {
