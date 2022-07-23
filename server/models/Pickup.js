@@ -2,12 +2,12 @@ const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
 const dateFormat = require('../utils/dateFormat');
 
-const thoughtSchema = new Schema(
+const pickupSchema = new Schema(
   {
-    thoughtText: {
+    title: {
       type: String,
-      required: 'You need to leave a thought!',
-      minlength: 1,
+      required: 'You need a title!',
+      minlength: 4,
       maxlength: 280
     },
     createdAt: {
@@ -15,11 +15,17 @@ const thoughtSchema = new Schema(
       default: Date.now,
       get: timestamp => dateFormat(timestamp)
     },
-    username: {
-      type: String,
+    ceatedBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true
     },
-    reactions: [reactionSchema]
+    participants: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ]
   },
   {
     toJSON: {
@@ -28,10 +34,10 @@ const thoughtSchema = new Schema(
   }
 );
 
-thoughtSchema.virtual('reactionCount').get(function() {
-  return this.reactions.length;
-});
+//pickupSchema.virtual('reactionCount').get(function() {
+//  return this.reactions.length;
+//});
 
-const Thought = model('Thought', thoughtSchema);
+const Pickup = model('Pickup', pickupSchema);
 
-module.exports = Thought;
+module.exports = Pickup;

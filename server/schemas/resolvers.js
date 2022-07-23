@@ -28,7 +28,7 @@ const resolvers = {
         .populate('friends')
         .populate('pickups');
     },
-    thoughts: async (parent, { username }) => {
+    pickups: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Pickup.find(params).sort({ createdAt: -1 });
     },
