@@ -70,7 +70,7 @@ const PickupForm = () => {
         onSubmit={handleFormSubmit}
       >
         <textarea
-          placeholder="Here's a new thought..."
+          placeholder="Here's a new pickup..."
           value={pickupText}
           className="form-input col-12 col-md-9"
           onChange={handleChange}

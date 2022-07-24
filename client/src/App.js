@@ -14,10 +14,10 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import NoMatch from './pages/NoMatch';
-import SingleThought from './pages/SinglePickup';
+import SinglePickup from './pages/SinglePickup';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
-import SinglePickup from './pages/SinglePickup';
+//import SinglePickup from './pages/SinglePickup';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
