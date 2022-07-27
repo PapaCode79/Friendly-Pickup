@@ -88,6 +88,21 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in!');
     },
+    adddelete: async (parent, args, context) => {
+      if (context.user) {
+        const deletePickup = await Delete.create({ ...args, createdBy: context.user._id });
+
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { deletes: delete_id } },
+          { new: true }
+        );
+
+        return pickup;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
     addFriend: async (parent, { friendId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(

@@ -19,6 +19,15 @@ const typeDefs = gql`
     reactions: [Reaction]
   }
 
+  type View {
+    _id: ID
+    viewText: String
+    createdAt: String
+    username: String
+    reactionCount: Int
+    reactions: [Reaction]
+  }
+
   type Reaction {
     _id: ID
     reactionBody: String
@@ -45,6 +54,8 @@ const typeDefs = gql`
     addPickup(pickupText: String!): Pickup
     addReaction(pickupId: ID!, reactionBody: String!): Pickup
     addFriend(friendId: ID!): User
+    addDelete(deleteText: String!): Delete
+    addUpdate(updateText: String!): Update
   }
 `;
 
