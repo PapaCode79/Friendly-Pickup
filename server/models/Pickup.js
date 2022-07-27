@@ -4,9 +4,9 @@ const dateFormat = require('../utils/dateFormat');
 
 const pickupSchema = new Schema(
   {
-    title: {
+    pickupText: {
       type: String,
-      required: 'You need a title!',
+      required: 'You need a pickupText!',
       minlength: 4,
       maxlength: 280
     },
@@ -15,7 +15,7 @@ const pickupSchema = new Schema(
       default: Date.now,
       get: timestamp => dateFormat(timestamp)
     },
-    ceatedBy: {
+    createdBy: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true

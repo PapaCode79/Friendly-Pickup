@@ -25,7 +25,7 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_PICKUP = gql`
-  mutation addPickup($PickupText: String!) {
+  mutation addPickup($pickupText: String!) {
     addPickup(pickupText: $pickupText) {
       _id
       pickupText

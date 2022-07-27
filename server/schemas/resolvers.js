@@ -62,7 +62,7 @@ const resolvers = {
     },
     addPickup: async (parent, args, context) => {
       if (context.user) {
-        const pickup = await Pickup.create({ ...args, username: context.user.username });
+        const pickup = await Pickup.create({ ...args, createdBy: context.user._id });
 
         await User.findByIdAndUpdate(
           { _id: context.user._id },
